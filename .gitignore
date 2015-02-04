@@ -1,0 +1,7 @@
+deps/*
+ebin
+_rel
+pkg/*
+.*.sw?
+.erlang.mk.*
+erl_crash.dump
