@@ -28,9 +28,22 @@ handle(Req, Opts) ->
     Renderer = proplists:get_value(renderer, Opts),
     true = (Renderer /= undefined),
     {AllBindings, Req1} = cowboy_req:bindings(Req),
-    {ok, Body} = Renderer:render(AllBindings),
+    {Url, _} = cowboy_req:url(Req),
+    {ok, Body} = Renderer:render([{url, shorten_link(Url)} | AllBindings]),
     {ok, Req2} = cowboy_req:reply(200, [{<<"content-type">>, <<"text/html">>}], Body, Req1),
     {ok, Req2, Opts}.
+
+shorten_link(Url) ->
+    try
+        {ok, "200", _, ShortUrl} = ibrowse:send_req("https://clck.ru/--?" ++ binary_to_list(cow_qs:qs([{<<"url">>, Url}])), [], get),
+        ShortUrl
+    catch
+        Class:Err ->
+            io:format("Shortening error: ~w:~120p~n", [Class, Err]),
+            Url
+    end.
+
+
 
 terminate(_, _, _) ->
     ok.

@@ -7,7 +7,9 @@
 	{applications, [
 		kernel,
 		stdlib,
-        cowboy
+        cowboy,
+        ssl,
+        ibrowse
 	]},
 	{mod, {quoter_app, []}},
 	{env, []}
