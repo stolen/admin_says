@@ -11,7 +11,10 @@ start() ->
 start_webserver() ->
     Dispatch = cowboy_router:compile([
                     %% {HostMatch, list({PathMatch, Handler, Opts})}
-                    {'_', [{"/admin_says/:subject/cannot/:cannot/[:feature]", ?MODULE, [{renderer, admin_says_dtl}]}]}
+                    {'_', [
+                        {"/admin_says/:subject/cannot/:cannot/[:feature]", ?MODULE, [{renderer, admin_says_dtl}]},
+                        {"/favicon.ico", ?MODULE, favicon}
+                        ]}
                 ]),
     %% Name, NbAcceptors, TransOpts, ProtoOpts
     cowboy:start_http(quoter_listener, 100,
@@ -24,6 +27,10 @@ start_webserver() ->
 init(_, Req, Opts) ->
     {ok, Req, Opts}.
 
+handle(Req, favicon) ->
+    {ok, Req2} = cowboy_req:reply(200, [{<<"content-type">>, <<"image/x-icon">>}], favicon(heart), Req),
+    {ok, Req2, favicon};
+
 handle(Req, Opts) ->
     Renderer = proplists:get_value(renderer, Opts),
     true = (Renderer /= undefined),
@@ -35,3 +42,13 @@ handle(Req, Opts) ->
 
 terminate(_, _, _) ->
     ok.
+
+
+
+favicon(heart) ->
+    base64:decode(<<
+            "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AFVVVQCIpP8AAAAAAAAAAAAAAAAAAAA"
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIgAAAAAAAAAhIAAAIiIiIiEgAAIRERERERIAIRERERERESAhER"
+            "EzMRERICEREzMzEREgIREzMzMxESAhETMzMzERICEREzEzEREgIRERERERESACERERERESAAAiIiIiIiAAAAAAAAAAAAD//wAA//8AAP+PAAD/xwAAwAcAAIADA"
+            "AAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAgAMAAMAHAAD//wAA"
+            >>).
