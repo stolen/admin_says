@@ -3,6 +3,8 @@
         <title>Админ о {{subject}}</title>
         <meta charset="utf-8"/>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body style="margin-top:40px;">
         <div class="container">
@@ -14,6 +16,8 @@
                     <h3>Я еще в 2012 году чувствовал, что с этой {{subject}} что-то не так, хотя ни разу ее не использовал.</h3>
                     <h3>Один разработчик хотел ее заиспользовать, и у нас спор чуть до мордобоя не дошел. Потом его уволили, конечно, потому что был он не разработчик, а пиздобол криворукий.</h3>
                     <p><em>- Даниил, системный администратор</em>   <sub>(<a href={{url}}>Link</a>)</sub></p>
+                    <div style="float:right"><a class="github-button" href="https://github.com/stolen/admin_says"></a></div>
+                    <div style="float:right" class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,gplus" data-yashareTheme="counter"></div>
                 </div>
             </div>
         </div>
@@ -44,6 +48,5 @@
         </script>
         <noscript><div><img src="//mc.yandex.ru/watch/28278226" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
-        <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,gplus" data-yashareTheme="counter"></div>
     </body>
 </html>
